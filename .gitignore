@@ -1,0 +1,4 @@
+generate
+.idea
+__pycache__
+*.txt
