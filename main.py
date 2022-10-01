@@ -1,4 +1,4 @@
-from models import MyWords, Intent, convert
+from models import Intent, convert
 from file import fileio
 
 
@@ -20,15 +20,15 @@ def sentences(filename, word1, word2, word3, word4, segment: bool = False):
                         fileio(filename, x)
 
 
-def intent():
+def SocialMediaExist():
     filename = 'newPage'
     # If dak word normally, modify segment to false
     # If wants to segment word, add space to each word,
     # for Intent.I, adding space for entity is optional
-    segment: bool = False
+    segment: bool = True
 
     words1 = convert(
-        intent=Intent.I,
+        intent=Intent.Person,
         segment=segment,
         words=[" Manuth ", "ម៉ាន៉ុត", " Rithiya ", "រិទ្ធិយ៉ា", " Chhunheang ", "ឈុនហ៊ាង",
                " Kimhong ", "គីមហុង", " Nary ",
@@ -40,7 +40,7 @@ def intent():
         words=["មាន ដឹង សាលា មាន ", "ដឹង ថា សាលា មាន "])
 
     words3 = convert(
-        intent=Intent.I,
+        intent=Intent.Organization,
         segment=segment,
         words=[' Facebook page ', "ហ្វេសបុកភេច", " social media page ", "សូសលមីឌិរភេច", " page ",
                "ភេច",
@@ -55,5 +55,44 @@ def intent():
     sentences(filename, word1=words1, word2=words2, word3=words3, word4=words4, segment=segment)
 
 
+def announceScholarship():
+    filename = 'announceScholarship'
+    # If dak word normally, modify segment to false
+    # If wants to segment word, add space to each word,
+    # for Intent.I, adding space for entity is optional
+    segment: bool = False
+
+    words1 = convert(
+        intent=Intent.I,
+        segment=segment,
+        words=[" Darot ", "ដារូ៉ត", " Jojo ", "ចូចូ", " Lita ", "លីតា",
+               " Duoung ", "ដួង", " Linda ",
+               "លីនដា", " Sokleap ", "សុខលាភ"])
+
+    words2 = convert(
+        intent=Intent.O,
+        segment=segment,
+        words=["ដឹង ថា សាលា បាន ប្រកាស ", "មាន ដឹង សាលា មាន ", ])
+
+    # words3 = convert(
+    #     intent=Intent.I,
+    #     segment=segment,
+    #     words=[' Facebook page ', "ហ្វេសបុកភេច", " social media page ", "សូសលមីឌិរភេច", " page ",
+    #            "ភេច",
+    #            " instagram page ", "អុីនស្តាក្រាម ភេច", " Twitter ", "ថ្វីតធឺរ", " TikTok ",
+    #            "តិកតុក"])
+    words3 = convert(
+        intent=Intent.I,
+        segment=segment,
+        words=["Scholarship Event", "អាហារូបករណ៍ event", "អាហារូបករណ៍ អុីវែន"])
+
+    words4 = convert(
+        intent=Intent.O,
+        segment=segment,
+        words=["នៅ?", "ទេ?"])
+
+    sentences(filename, word1=words1, word2=words2, word3=words3, word4=words4, segment=segment)
+
+
 if __name__ == '__main__':
-    intent()
+    SocialMediaExist()
